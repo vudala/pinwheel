@@ -138,6 +138,4 @@ function graph(){
       var data = [trace1, trace2];
       
       Plotly.newPlot('myDiv', data, layout);
-    
-
 }
