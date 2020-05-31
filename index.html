@@ -17,15 +17,18 @@
         </div>
         <div class="row padding" style="background-color: aqua;">
             <div class="col-sm-12 col-lg-3">
-                <p>
-                    Form
-                    Form
-                    Form
-                    Form
-                    Form
-                    Form
-                    Form
-                </p>
+                <form>
+                    <label for="cidade"> Cidade </label><br>
+                    <input type="text" id="cidade" name="cidade"><br>
+
+                    <label for="datainicio"> De (dados disponiveis a partir de 08/05/2013)</label><br>
+                    <input type="date" id="datainicio" name="datainicio"><br>
+
+                    <label for="datafim"> Até </label><br>
+                    <input type="date" id="datafim" name="datafim"><br>
+
+                    <button type="button" onclick="analisar(cidade, datainicio, datafim)"> Analisar </button>
+                </form>
             </div>
             <div class="col-sm-12 col-lg-9">
                 <canvas class="globe-canvas" id="canvasOne">

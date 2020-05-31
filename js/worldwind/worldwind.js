@@ -25,11 +25,22 @@ placemarkAttributes.imageSource = WorldWind.configuration.baseUrl + "images/push
 var position = new WorldWind.Position(-23.5475, -46.63611, 100.0);
 var placemark = new WorldWind.Placemark(position, false, placemarkAttributes);
 placemark.label = "São Paulo\n" + "NO2: 32";
-placemark.alwaysOnTop = true;
 placemarkLayer.addRenderable(placemark);
 
 position = new WorldWind.Position(-25.441105, -49.276855, 100.0);
 placemark = new WorldWind.Placemark(position, false, placemarkAttributes);
 placemark.label = "Curitiba\n" + "NO2: 4";
-placemark.alwaysOnTop = true;
 placemarkLayer.addRenderable(placemark);
+
+
+function analisar(cidade, datainicio, datafim){
+    if(cidade.value == ""){
+        alert("por favor insira dados corretos");
+    } else if (datainicio.value == "") {
+        alert("por favor insira dados corretos");
+    } else if (datafim.value == "") {
+        alert("por favor insira dados corretos");
+    } else {
+        alert(cidade.value + " " + datainicio.value + " " + datafim.value);
+    }
+}
