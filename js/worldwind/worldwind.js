@@ -100,7 +100,7 @@ function posicionarpin(){
 }
 
 function plotar(){
-    if(pinatual != null && highlightedItems == []){
+    if(pinatual != null && highlightedItems != []){
         alert(pinatual);
     }
 }
