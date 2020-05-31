@@ -93,7 +93,7 @@ function analisar(cidade, datainicio, datafim){
 function posicionarpin(){   
     url = 'https://obscure-earth-56458.herokuapp.com/stations';
 
-    fetch(url, { mode: 'no-cors'})
+    fetch(url)
         .then(function(response) {
             response.json().then(function(json){
                 for (var k of json){
