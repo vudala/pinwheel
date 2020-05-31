@@ -61,6 +61,7 @@ var handlePick = function (o) {
 
     if (redrawRequired) {
         wwd.redraw();
+    }
 };
 
 wwd.addEventListener("mousemove", handlePick);
