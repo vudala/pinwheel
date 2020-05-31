@@ -32,6 +32,9 @@ placemark = new WorldWind.Placemark(position, false, placemarkAttributes);
 placemark.label = "Curitiba\n" + "NO2: 4";
 placemarkLayer.addRenderable(placemark);
 
+wwd.goTo(new WorldWind.Position(-23.5475, -46.63611, 800000.0));
+
+buscarpin();
 
 function analisar(cidade, datainicio, datafim){
     if(cidade.value == ""){
@@ -43,4 +46,20 @@ function analisar(cidade, datainicio, datafim){
     } else {
         alert(cidade.value + " " + datainicio.value + " " + datafim.value);
     }
+}
+
+function buscarpin(){
+    var myHeaders = new Headers();
+
+    var myInit = { method: 'GET',
+                headers: myHeaders,
+                mode: 'no-cors',
+                cache: 'default' };
+    
+    url = 'https://obscure-earth-56458.herokuapp.com/stations';
+
+    fetch(url)
+        .then(function(response) {
+            console.log(response);
+        });
 }
