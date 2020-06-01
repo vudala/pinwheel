@@ -120,26 +120,25 @@ function buscarNitrogenio(){
         fetch(url, {'Origin' : 'https://pinwheel-nasa.co/'})
         .then(function(response) {
             response.json().then(function(json){
-                for (var k of json){
-                    nitrogenio.shift(k.nitrogen);
-                }
+                console.log(json.quality.ozone);
             });
         });
-        xaxys.shift(day+'/'+month);
+        sleep(2000);
+        //xaxys.push(day+'/'+month);
     }
 
 
-    trace1 = {
-        type: 'scatter',
-        x: xaxys,
-        y: nitrogenio,
-        mode: 'lines',
-        name: 'Red',
-        line: {
-          color: 'rgb(219, 64, 82)',
-          width: 3
-        }
-    };
+    // trace1 = {
+    //     type: 'scatter',
+    //     x: xaxys,
+    //     y: nitrogenio,
+    //     mode: 'lines',
+    //     name: 'Red',
+    //     line: {
+    //       color: 'rgb(219, 64, 82)',
+    //       width: 3
+    //     }
+    // };
     
 }
 
