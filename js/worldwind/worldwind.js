@@ -183,3 +183,7 @@ function graph(){
       
       Plotly.newPlot('myDiv', data, layout);
 }
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
