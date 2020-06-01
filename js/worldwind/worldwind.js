@@ -111,35 +111,46 @@ function buscarNitrogenio(){
     console.log(year + '-' + month + '-' + dayMonthRel[month] + '-' + stationid + '-' + date);
     url = 'https://obscure-earth-56458.herokuapp.com/stations/'
 
-    nitrogenio = [];
+    sulfur = [];
     xaxys = [];
 
-    for(day = 1; 1 <= dayMonthRel[month]; day++){
+    for(day = 1; day <= dayMonthRel[month]; day++){
         url = 'https://obscure-earth-56458.herokuapp.com/stations/' + stationid +
-        + '/' + year + '/' + month + '/' + day;
+         '/' + year + '/' + month + '/' + day;
         fetch(url, {'Origin' : 'https://pinwheel-nasa.co/'})
         .then(function(response) {
             response.json().then(function(json){
-                console.log(json.quality.ozone);
+                sulfur[day] = parseInt(json.quality.sulfur, 10);
+                console.log(json.quality.sulfur);
             });
         });
-        sleep(2000);
-        //xaxys.push(day+'/'+month);
+        xaxys.push(day);
     }
 
-
-    // trace1 = {
-    //     type: 'scatter',
-    //     x: xaxys,
-    //     y: nitrogenio,
-    //     mode: 'lines',
-    //     name: 'Red',
-    //     line: {
-    //       color: 'rgb(219, 64, 82)',
-    //       width: 3
-    //     }
-    // };
+    console.log(sulfur);
+    console.log(xaxys);
     
+    trace1 = {
+        type: 'scatter',
+        x: xaxys,
+        y: sulfur,
+        mode: 'lines',
+        name: 'Red',
+        line: {
+          color: 'rgb(219, 64, 82)',
+          width: 3
+        }
+    };
+
+    var layout = {
+        width: 500,
+        height: 500
+      };
+      
+    var data = [trace1];
+    
+    Plotly.newPlot('myDiv', data, layout);
+
 }
 
 function plotar(datainicio){
@@ -149,40 +160,40 @@ function plotar(datainicio){
     }
 }
 
-function graph(){
-    trace1 = {
-        type: 'scatter',
-        x: ['1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'],
-        y: [38, 40, 42, 42, 42, 42, 42, 43, 43, 42, 42, 42, 43, 43, 43, 43, 43, 43, 42],
-        mode: 'lines',
-        name: 'Red',
-        line: {
-          color: 'rgb(219, 64, 82)',
-          width: 3
-        }
-      };
+// function graph(){
+//     trace1 = {
+//         type: 'scatter',
+//         x: ['1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'],
+//         y: [38, 40, 42, 42, 42, 42, 42, 43, 43, 42, 42, 42, 43, 43, 43, 43, 43, 43, 42],
+//         mode: 'lines',
+//         name: 'Red',
+//         line: {
+//           color: 'rgb(219, 64, 82)',
+//           width: 3
+//         }
+//       };
       
-      trace2 = {
-        type: 'scatter',
-        x: ['1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'],
-        y: [38, 40, 42, 42, 42, 42, 42, 43, 43, 42, 42, 42, 43, 43, 43, 43, 43, 43, 42],
-        mode: 'lines',
-        name: 'Blue',
-        line: {
-          color: 'rgb(55, 128, 191)',
-          width: 1
-        }
-      };
+//       trace2 = {
+//         type: 'scatter',
+//         x: ['1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'],
+//         y: [38, 40, 42, 42, 42, 42, 42, 43, 43, 42, 42, 42, 43, 43, 43, 43, 43, 43, 42],
+//         mode: 'lines',
+//         name: 'Blue',
+//         line: {
+//           color: 'rgb(55, 128, 191)',
+//           width: 1
+//         }
+//       };
       
-      var layout = {
-        width: 500,
-        height: 500
-      };
+//       var layout = {
+//         width: 500,
+//         height: 500
+//       };
       
-      var data = [trace1, trace2];
+//       var data = [trace1, trace2];
       
-      Plotly.newPlot('myDiv', data, layout);
-}
+//       Plotly.newPlot('myDiv', data, layout);
+// }
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
