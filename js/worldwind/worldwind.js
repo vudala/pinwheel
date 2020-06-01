@@ -66,12 +66,10 @@ var handlePick = function (o) {
 
 wwd.addEventListener("mousemove", handlePick);
 
-function analisar(cidade, datainicio, datafim){
+function analisar(cidade, datainicio){
     if(cidade.value == ""){
         alert("por favor insira dados corretos");
     } else if (datainicio.value == "") {
-        alert("por favor insira dados corretos");
-    } else if (datafim.value == "") {
         alert("por favor insira dados corretos");
     } else {
         alert(cidade.value + " " + datainicio.value + " " + datafim.value);
@@ -92,16 +90,63 @@ function posicionarpin(){
                     highlightAttributes.imageScale = 0.5;
                     placemark.highlightAttributes = highlightAttributes;
                     placemark.alwaysOnTop = true;
-                    placemark.label = k.name;
+                    placemark.label = k.name+'-'+k.id;
                     placemarkLayer.addRenderable(placemark);
                 }
             });
         });
 }
 
-function plotar(){
+function buscarNitrogenio(){
+
+    date = datainicio.value;
+    var year = parseInt(date.split("-")[0],10);
+    var dayMonthRel = [0,31,28,31,30,31,30,31,31,30,31,30,31];
+    if(year % 4 == 0){
+        dayMonthRel[2] = 29;
+    } // se for bissexto
+    var month = parseInt(date.split("-")[1],10);
+    stationid = parseInt(pinatual.split('-')[1],10);
+
+    console.log(year + '-' + month + '-' + dayMonthRel[month] + '-' + stationid + '-' + date);
+    url = 'https://obscure-earth-56458.herokuapp.com/stations/'
+
+    nitrogenio = [];
+    xaxys = [];
+
+    for(day = 1; 1 <= dayMonthRel[month]; day++){
+        url = 'https://obscure-earth-56458.herokuapp.com/stations/' + stationid +
+        + '/' + year + '/' + month + '/' + day;
+        fetch(url, {'Origin' : 'https://pinwheel-nasa.co/'})
+        .then(function(response) {
+            response.json().then(function(json){
+                for (var k of json){
+                    nitrogenio.shift(k.nitrogen);
+                }
+            });
+        });
+        xaxys.shift(day+'/'+month);
+    }
+
+
+    trace1 = {
+        type: 'scatter',
+        x: xaxys,
+        y: nitrogenio,
+        mode: 'lines',
+        name: 'Red',
+        line: {
+          color: 'rgb(219, 64, 82)',
+          width: 3
+        }
+    };
+    
+}
+
+function plotar(datainicio){
     if(pinatual != null && highlightedItems != []){
         alert(pinatual);
+        buscarNitrogenio();
     }
 }
 
